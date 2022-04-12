@@ -1,12 +1,12 @@
 #include "main.h"
 
 /**
- * times_table - print times table up to input
+ *print_times_table - print times table up to input
  * Description: Writes times table up to imput not exceeding 15
  * @n: size of times table
  * Return: Nothing
  */
-void print_times_table(int n)
+void times_table(int n)
 {
 	int y, x, prod;
 
