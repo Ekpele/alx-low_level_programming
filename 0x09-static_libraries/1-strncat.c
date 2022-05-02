@@ -1,4 +1,4 @@
-include "main.h"
+#include "main.h"
 
 /**
  *_strncat - concatenates two strings
@@ -8,7 +8,6 @@ include "main.h"
  *Return: dest
  */
 
-,
 char *_strncat(char *dest, char *src, int n)
 
 {
