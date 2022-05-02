@@ -1,93 +1,67 @@
+#include "main.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include <ctype.h>
-#include <string.h>
 
 /**
- * check_num - check - string there are digit
- * @str: array str
- * Return; Always 0 (Success)
- */
+ * numchecker - verifies if string has only numbers
+ * @s: string to check
+ * Description: return 1 if only numbers in string, 0 if not
+ * Return: 1 if only numbers, 0 if not
+ **/
 
-int check_num(char *str)
-
-{
-
-/*Declaring variables*/
-
-unsigned int count;
-
-count = 0;
-
-while (count < strlen(str)) /*count string*/
+int numchecker(char *s)
 
 {
 
-if (!isdigit(str[count])) /*check if str there are digit*/
+	int i;
 
-{
+	for (i = 0; s[i] != '\0'; i++)
 
-return (0);
+	{
 
-}
+		if (s[i] < '0' || s[i] > '9')
 
-count++;
+			return (0);
+	}
 
-}
-
-return (1);
-
+	return (1);
 }
 
 /**
- * main - Print the name of the program
- * @argc: Count arguments
- * @argv: Arguments
- * return: Always 0 (Success)
- */
+ * main - find least amount of coins needed for change
+ * @argc: number of parameters entered
+ * @argv: strings entered including file name
+ * Description: prints the minimum number of coins to make change
+ * Return: zero
+ **/
 
-int main(int argc, char *argv[])
-
-{
-
-/*Declaring variables*/
-int count;
-int str_to_int;
-int sum = 0;
-
-count = 1;
-
-while (count < argc) /*Goes through the whole array*/
+int main(int argc, char **argv)
 
 {
 
-if(check_num(argv[count]))
+	int sum, i;
 
-{
+	sum = 0;
 
-str_to_int = atoi(argv[count]); /*ATOI --> convert string to int*/
+	for (i = 1; i < argc; i++)
 
-sum += str_to_int;
+	{
 
-}
+		if (numchecker(argv[i]) == 0)
 
-/*Condition if one of the number contains symbols that are not digits*/
+		{
+			printf("Error\n");
+			return (1);
+		}
 
-else
+		if (atoi(argv[i]) <= 0)
 
-{
-
-printf("Error\n");
-
-return (1);
-
-}
-
-count++;
-
-}
-
-printf("%d\n", sum); /*print sum*/
-
-return (0);
+		{
+			printf("Error\n");
+			return (1);
+		}
+		sum += atoi(argv[i]);
+	}
+	printf("%d\n", sum);
+	return (0);
 }
