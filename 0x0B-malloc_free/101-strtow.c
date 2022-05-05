@@ -73,7 +73,6 @@ char **strtow(char *str)
 	for (i = 0; i < wc; i++)
 	{
 		l = 0;
-
 		while (*(ts + l) != ' ' && *(ts + l) != 0)
 			l++;
 		s[i] = malloc((l + 1) * sizeof(char));
