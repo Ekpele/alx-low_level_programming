@@ -13,6 +13,7 @@ int _strnlen(const char *s)
 
 {
 	int i;
+
 	if (s == NULL)
 		return (0);
 	for (i = 0; s[i] != '\0'; i++)
@@ -31,7 +32,9 @@ list_t *add_node(list_t **head, const char *str)
 
 {
 	list_t *new;
+
 	new = malloc(sizeof(list_t));
+
 	if (new == NULL)
 		return (NULL);
 	new->str = strdup(str);
