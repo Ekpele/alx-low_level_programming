@@ -21,6 +21,6 @@ prev = *head;
 *head = next;
 }
 
-head = prev;
+*head = prev;
 return (*head);
 }
