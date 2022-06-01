@@ -29,11 +29,12 @@ void check_elf(unsigned char *e_ident)
 	int index;
 
 	for (index = 0; index < 4; index++)
+
 	{
 		if (e_ident[index] != 127 &&
-		e_ident[index] != 'E' &&
-		e_ident[index] != 'L' &&
-		e_ident[index] != 'F')
+		    e_ident[index] != 'E' &&
+		    e_ident[index] != 'L' &&
+		    e_ident[index] != 'F')
 		{
 			dprintf(STDERR_FILENO, "Error: Not an ELF file\n");
 			exit(98);
@@ -53,6 +54,7 @@ void print_magic(unsigned char *e_ident)
 	int index;
 
 	printf("  Magic:   ");
+
 	for (index = 0; index < EI_NIDENT; index++)
 	{
 		printf("%02x", e_ident[index]);
@@ -71,9 +73,10 @@ void print_magic(unsigned char *e_ident)
 void print_class(unsigned char *e_ident)
 
 {
-	printf("  Class: 			");
+	printf("  Class:                             ");
 
 	switch (e_ident[EI_CLASS])
+
 	{
 	case ELFCLASSNONE:
 		printf("none\n");
@@ -100,6 +103,7 @@ void print_data(unsigned char *e_ident)
 	printf("  Data:                              ");
 
 	switch (e_ident[EI_DATA])
+
 	{
 	case ELFDATANONE:
 		printf("none\n");
@@ -124,10 +128,11 @@ void print_version(unsigned char *e_ident)
 
 {
 	printf("  Version:                           %d",
-	 
-			e_ident[EI_VERSION]);
+
+	       e_ident[EI_VERSION]);
 
 	switch (e_ident[EI_VERSION])
+
 	{
 	case EV_CURRENT:
 		printf(" (current)\n");
@@ -149,6 +154,7 @@ void print_osabi(unsigned char *e_ident)
 	printf("  OS/ABI:                            ");
 
 	switch (e_ident[EI_OSABI])
+
 	{
 	case ELFOSABI_NONE:
 		printf("UNIX - System V\n");
@@ -195,7 +201,7 @@ void print_abi(unsigned char *e_ident)
 {
 	printf("  ABI Version:                       %d\n",
 
-	e_ident[EI_ABIVERSION]);
+	       e_ident[EI_ABIVERSION]);
 
 }
 
@@ -213,8 +219,8 @@ void print_type(unsigned int e_type, unsigned char *e_ident)
 		e_type >>= 8;
 
 	printf("  Type:                              ");
-
 	switch (e_type)
+
 	{
 	case ET_NONE:
 		printf("NONE (None)\n");
@@ -251,11 +257,13 @@ void print_entry(unsigned long int e_entry, unsigned char *e_ident)
 
 	{
 		e_entry = ((e_entry << 8) & 0xFF00FF00) |
-			((e_entry >> 8) & 0xFF00FF);
+			  ((e_entry >> 8) & 0xFF00FF);
 		e_entry = (e_entry << 16) | (e_entry >> 16);
 	}
+
 	if (e_ident[EI_CLASS] == ELFCLASS32)
 		printf("%#x\n", (unsigned int)e_entry);
+
 	else
 		printf("%#lx\n", e_entry);
 }
@@ -269,7 +277,6 @@ void print_entry(unsigned long int e_entry, unsigned char *e_ident)
 void close_elf(int elf)
 
 {
-
 	if (close(elf) == -1)
 
 	{
@@ -328,6 +335,7 @@ int main(int __attribute__((__unused__)) argc, char *argv[])
 	print_abi(header->e_ident);
 	print_type(header->e_type, header->e_ident);
 	print_entry(header->e_entry, header->e_ident);
+
 	free(header);
 	close_elf(o);
 	return (0);
