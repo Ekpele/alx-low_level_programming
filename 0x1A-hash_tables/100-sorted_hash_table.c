@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include "hash_tables.h"
 
-void insert_sorted(shash_table_t *ht, shash_node_t *new);
+void insert_sorted(hash_table_t *ht, hash_node_t *new);
 
 /**
  * shash_table_create - Allocates memory for a sorted hash table.
@@ -12,9 +12,9 @@ void insert_sorted(shash_table_t *ht, shash_node_t *new);
  * NULL on error.
  */
 
-shash_table_t *shash_table_create(unsigned long int size)
+hash_table_t *shash_table_create(unsigned long int size)
 {
-	shash_table_t *new;
+	hash_table_t *new;
 	unsigned long int idx;
 
 	if (size == 0)
